@@ -25,7 +25,7 @@ function Interviewer() {
         <NameField
           placeholder="Interviewer name"
           label="Name"
-          name="interviewer"
+          name="interviewerName"
         ></NameField>
         <EmailField
           placeholder="Company email"

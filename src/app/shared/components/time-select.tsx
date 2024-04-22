@@ -13,7 +13,7 @@ export default function TimeSelect() {
 
   function disabledAppointmentHours() {
     return {
-      disabledHours: () => [0, 1, 2, 3, 4, 5, 6, 7, 8, 18, 19, 20, 21, 22, 23],
+      disabledHours: () => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 17, 18, 19, 20, 21, 22, 23],
     };
   }
   return (
@@ -26,7 +26,7 @@ export default function TimeSelect() {
         wrapperCol={{ span: 24 }}
       >
         <TimePicker
-          defaultOpenValue={dayjs("00:00", "HH:mm")}
+          defaultOpenValue={dayjs("13:00", "HH:mm")}
           format={"HH:mm"}
           size="large"
           minuteStep={15}
