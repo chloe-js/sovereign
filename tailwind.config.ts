@@ -8,13 +8,25 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+      colors: {
+        'svn-primary': '#00594c',
+        'svn-secondary': '#018476',
+        'svn-danger': '#f7403a',
+        'svn-warning': '#ffd800',
+        'svn-success': '#93c90e',
+        'svn-info': '#11becf',
+        'svn-default': '#f6f6f6',
+        'svn-base': '#333333',
+        'svn-text-primary': '#333333',
+        'svn-text-danger': '#f7403a',
+        'svn-text-warning': '#ffd800',
+        'svn-text-success': '#93c90e',
+        'svn-text-info': '#11becf',
+        'svn-text-disabled': '#777777',
+      }
     },
   },
   plugins: [],
+  darkMode: 'selector'
 };
 export default config;
