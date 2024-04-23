@@ -1,5 +1,5 @@
 import React from 'react'
-import Interviewer from '../components/interviewer'
+import Interviewer from '../components/interviewer-form'
 
 export default function Add() {
   return (

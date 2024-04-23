@@ -1,7 +1,8 @@
 import { Table } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { columns } from "../shared/util/constants";
-import { Level } from "../shared/interfaces/enums";
+import { Level, Role } from "../shared/interfaces/enums";
+import { Interviewer } from "../shared/interfaces/constants";
 
 export default function Interviewers({ receivedTime }: any) {
   function formatHour(time: any) {
@@ -23,32 +24,50 @@ export default function Interviewers({ receivedTime }: any) {
     }),
   };
 
-  const data: any[] = [
-    {
-      key: '1',
-      name: 'John Brown',
-      level: Level.MID,
-      main: '--'
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      level: Level.JUNIOR,
-      main: '--'
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      level: Level.SENIOR,
-      main: '--'
-    },
-    {
-      key: '4',
-      name: 'Disabled User',
-      level: Level.SENIOR,
-      main: '--'
-    },
-  ];
+  const [interviewers, setInterviewers] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/interviewers")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        const interviewers = data.map((i: any) => {
+          return {
+            ...i, 
+            role: setRoleValue(i),
+            level: setLevelValue(i),
+            available: setAvailabilityValue(i),
+            key: i.id
+          }
+        })
+        setInterviewers(interviewers);
+      })
+      .catch((err) => console.log("Fuck me " + err));
+  }, []);
+
+  const setRoleValue = (value: Interviewer) => {
+    return value.role === 1 ? Role.BE : Role.FE;
+  }
+  const setLevelValue = (value: Interviewer) => {
+    switch (value.available) {
+      case 'tuesday':
+        return 'Tuesdays'
+      case 'thursday':
+        return 'Thursdays'
+      default:
+        return 'Both'
+    }
+  }
+  const setAvailabilityValue = (value: Interviewer) => {
+    switch (value.available) {
+      case 'junior':
+        return Level.JUNIOR
+      case 'mid':
+        return Level.MID
+      default:
+        return Level.SENIOR
+    }
+  }
 
   return (
     <div className="border-t-2 mx-20">
@@ -66,7 +85,7 @@ export default function Interviewers({ receivedTime }: any) {
             ...rowSelection,
           }}
           columns={columns}
-          dataSource={data}
+          dataSource={interviewers}
         />
       </div>
     </div>

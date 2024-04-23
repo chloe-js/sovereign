@@ -1,8 +1,9 @@
 import { Form, Select } from "antd";
 import React, { useState } from "react";
-import { disciplines } from "../util/constants";
+import { available, level } from "../util/constants";
+import { InputProps } from "../interfaces/constants";
 
-export default function DisciplineSelect() {
+export default function DayAvailableSelect(props: InputProps) {
   const [value, setValue] = useState("");
 
   const update = (e: any) => {
@@ -12,17 +13,17 @@ export default function DisciplineSelect() {
 
   return (
     <Form.Item
-      label="Disciplines"
-      name="disciplines"
+      label={props.label}
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
+      name={props.name}
     >
       <Select
         size="large"
-        placeholder="Select discipline"
-        options={disciplines}
-        value={value}
         onChange={(e) => update(e)}
+        value={value}
+        placeholder={props.placeholder}
+        options={available}
       ></Select>
     </Form.Item>
   );

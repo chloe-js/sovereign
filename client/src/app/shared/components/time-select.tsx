@@ -2,8 +2,9 @@
 import { Form, TimePicker } from "antd";
 import React, { useState } from "react";
 import dayjs from "dayjs";
+import { InputProps } from "../interfaces/constants";
 
-export default function TimeSelect() {
+export default function TimeSelect(props: InputProps) {
   const [time, setTime] = useState({ hour: null, minute: null });
 
   function setAppointmentTime(timeObj: any) {
@@ -19,9 +20,9 @@ export default function TimeSelect() {
   return (
     <>
       <Form.Item
-        label="Time"
+        label={props.label}
         colon={false}
-        name="time"
+        name={props.name}
         labelCol={{ span: 24 }}
         wrapperCol={{ span: 24 }}
       >
@@ -29,6 +30,8 @@ export default function TimeSelect() {
           defaultOpenValue={dayjs("13:00", "HH:mm")}
           format={"HH:mm"}
           size="large"
+          style={{width: "100%"}}
+          placeholder={props.placeholder}
           minuteStep={15}
           order={true}
           disabledTime={() => disabledAppointmentHours()}

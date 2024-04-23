@@ -1,9 +1,9 @@
 import { Form, Select } from "antd";
 import React, { useState } from "react";
-import { level } from "../util/constants";
+import { roles } from "../util/constants";
 import { InputProps } from "../interfaces/constants";
 
-export default function LevelSelect(props: InputProps) {
+export default function SoftwareRoleSelect(props: InputProps) {
   const [value, setValue] = useState("");
 
   const update = (e: any) => {
@@ -14,16 +14,16 @@ export default function LevelSelect(props: InputProps) {
   return (
     <Form.Item
       label={props.label}
+      name={props.name}
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
-      name={props.name}
     >
       <Select
         size="large"
-        onChange={(e) => update(e)}
-        value={value}
         placeholder={props.placeholder}
-        options={level}
+        options={roles}
+        value={value}
+        onChange={(e) => update(e)}
       ></Select>
     </Form.Item>
   );

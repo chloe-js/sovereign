@@ -1,10 +1,11 @@
-const express = require('express');
+import express from 'express';
+import cors from 'cors';
+import router from './router.js'
 const app = express();
 const PORT = 8080;
 
-app.get("/api/home", (req, res) => {
-    res.json({msg: "Working"})
-})
+app.use(cors())
+app.use('/', router)
 
 app.listen(PORT, () => {
     console.log(`Server started on ${PORT}`);

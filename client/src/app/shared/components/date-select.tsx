@@ -2,11 +2,12 @@ import { DatePicker, Form } from "antd";
 import { RangePickerProps } from "antd/es/date-picker";
 import dayjs from "dayjs";
 import React from "react";
+import { InputProps } from "../interfaces/constants";
 
-export default function DateSelect() {
-  const disabledDate: RangePickerProps['disabledDate'] = (current) => {
+export default function DateSelect(props: InputProps) {
+  const disabledDate: RangePickerProps["disabledDate"] = (current) => {
     // Disable all days before today
-    if (current && current < dayjs().endOf('day')) {
+    if (current && current < dayjs().endOf("day")) {
       return true;
     }
 
@@ -15,12 +16,17 @@ export default function DateSelect() {
   };
   return (
     <Form.Item
-      label="Date"
-      name="date"
+      label={props.label}
+      name={props.name}
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
     >
-      <DatePicker size="large" disabledDate={disabledDate} />
+      <DatePicker
+        placeholder={props.placeholder}
+        style={{width: "100%"}}
+        size="large"
+        disabledDate={disabledDate}
+      />
     </Form.Item>
   );
 }

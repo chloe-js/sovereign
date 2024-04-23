@@ -1,11 +1,11 @@
 import { TableColumnsType } from "antd";
 import { Select } from "../interfaces/constants";
-import { Discipline, Level } from "../interfaces/enums";
+import { Availability, Role, Level } from "../interfaces/enums";
 
 
-export const disciplines: Select[]  = [
-  { value: "fe", label: Discipline.FE },
-  { value: "be", label: Discipline.BE },
+export const roles: Select[]  = [
+  { value: 0, label: Role.FE },
+  { value: 1, label: Role.BE },
 ];
 
 export const level: Select[] = [
@@ -14,10 +14,16 @@ export const level: Select[] = [
   { value: "senior", label: Level.SENIOR },
 ];
 
+export const available: Select[] = [
+  { value: "tuesday", label: Availability.TU },
+  { value: "thursday", label: Availability.TH },
+  { value: "both", label: Availability.BTH },
+];
+
 export const columns: TableColumnsType<any> = [
   {
     title: 'Name',
-    dataIndex: 'name',
+    dataIndex: 'interviewerName',
     render: (text: string) => <a>{text}</a>,
   },
   {
@@ -25,12 +31,16 @@ export const columns: TableColumnsType<any> = [
     dataIndex: 'level',
   },
   {
-    title: 'Screen',
-    dataIndex: 'screen',
+    title: 'Role',
+    dataIndex: 'role',
   },
   {
-    title: 'Main',
-    dataIndex: 'main',
+    title: 'Email',
+    dataIndex: 'email',
+  },
+  {
+    title: 'Avail.',
+    dataIndex: 'available',
   },
   {
     title: 'Notes',
