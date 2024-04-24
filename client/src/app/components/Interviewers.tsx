@@ -6,6 +6,7 @@ import { setAvailabilityValue, setLevelValue, setRoleValue } from "../shared/uti
 export default function Interviewers(props: any) {
 
   const [interviewers, setInterviewers] = useState([]);
+  const [selectedRole, setSelectedRole] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:8080/api/interviewers")
@@ -25,6 +26,11 @@ export default function Interviewers(props: any) {
       .catch((err) => console.error('Error loading SQL data: ' + err));
   }, []);
 
+  useEffect(() => {
+    console.log(props.role)
+    setSelectedRole(props.role)
+  }, [props.role])
+
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: any[]) => {
       console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -41,6 +47,8 @@ export default function Interviewers(props: any) {
       <h2 className="py-6 text-xl">
         Available interviewers
       </h2>
+      <h1>{props.role}</h1>
+      <h1>{selectedRole}</h1>
       <div>
         <Table
         className="pb-10"

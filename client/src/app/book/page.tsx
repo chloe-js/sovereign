@@ -15,7 +15,7 @@ export default function Book() {
   return (
     <>
       <CandidateForm onDataChange={handleInterviewerDataChange}></CandidateForm>
-      <Interviewers ></Interviewers>
+      <Interviewers role={interviewerData}></Interviewers>
     </>
   );
 }
