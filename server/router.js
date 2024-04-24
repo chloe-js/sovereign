@@ -1,10 +1,14 @@
 import express from 'express';
-import { getAvailableInterviewers } from './database.js';
-
+import cors from 'cors';
+import { addInterviewer, getAvailableInterviewers } from './database.js';
+import { __dirname } from './utils.js';
 const router = express.Router();
+
+router.use(cors());
+
+
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
-
 
 router.get("/api/interviewers", async (req, res) => {
     const data = getAvailableInterviewers();
@@ -14,9 +18,11 @@ router.get("/api/interviewers", async (req, res) => {
 
 
 router.post("/api/add-interviewer", async (req, res) => {
-    const data = getAvailableInterviewers();
-    const interviewers = await data;
-    res.json(interviewers) 
+    await addInterviewer(req.body)
+    const redirectUrl = 'http://localhost:3000/book';
+    res.status(200).json({ redirectUrl });
 })
 
-export default router
+router.options("*", cors());
+
+export default router;

@@ -1,10 +1,7 @@
 import mysql from "mysql2";
-import path from 'path';
-import { fileURLToPath } from 'url';
 import dotenv from "dotenv";
+import { __dirname, path } from './utils.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 dotenv.config({
     path: path.resolve(__dirname, './.env')
 });
@@ -30,36 +27,37 @@ export async function getAvailableInterviewers() {
     return data;
 }
 
-// export async function createResolution(data) {
-//   const {
-//     titleOne,
-//     bodyOne,
-//     titleTwo,
-//     bodyTwo,
-//     titleThree,
-//     bodyThree,
-//     email,
-//     code,
-//     username,
-//     resolutionEnd
-//   } = data;
+export async function addInterviewer(data) {
+    if(!data.notes || !data.notes.length) data.notes = 'None';
 
-//   await pool.query(
-//     `
-//         INSERT INTO resolution (titleOne, bodyOne, titleTwo, bodyTwo, titleThree, bodyThree, email, code, username, resolutionEnd)
-//         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-//     `,
-//     [
-//       titleOne,
-//       bodyOne,
-//       titleTwo,
-//       bodyTwo,
-//       titleThree,
-//       bodyThree,
-//       email,
-//       code,
-//       username,
-//       resolutionEnd
-//     ]
-//   );
-// }
+    const {
+        interviewerName,
+        email,
+        role,
+        level,
+        notes,
+        available
+    } = data;
+
+    await pool.query(
+        `
+        INSERT INTO interviewers (
+            interviewerName,
+            email,
+            role,
+            level,
+            notes,
+            available
+        ) VALUES (?, ?, ?, ?, ?, ?)
+    `,
+        [
+            interviewerName,
+            email,
+            role,
+            level,
+            notes,
+            available
+        ]
+    ).catch(err => console.error('Failed to insert data into Interviewers table -> ' + err));
+
+}
