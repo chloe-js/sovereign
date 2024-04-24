@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Interviewers from "../components/Interviewers";
-import Candidate from "../components/candidate-form";
+import CandidateForm from "../components/candidate-form";
 
 export default function Book() {
   const [interviewerData, setInterviewerData] = useState(null);
@@ -14,8 +14,8 @@ export default function Book() {
 
   return (
     <>
-      {/* <Candidate onDataChange={handleInterviewerDataChange}></Candidate> */}
-      <Interviewers></Interviewers>
+      <CandidateForm onDataChange={handleInterviewerDataChange}></CandidateForm>
+      <Interviewers ></Interviewers>
     </>
   );
 }

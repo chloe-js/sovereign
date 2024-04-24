@@ -6,15 +6,16 @@ import NameField from "../shared/components/name-field";
 import TimeSelect from "../shared/components/time-select";
 import SoftwareRoleSelect from "../shared/components/software-role-select";
 
-function Candidate() {
+function CandidateForm({ onDataChange }: any) {
   const [form] = Form.useForm();
 
   function onFinish(form: any) {
     console.log(form);
   }
 
-  function updateVals(){
-
+  function handleFormDataChange(data: any) {
+    console.log('ass')
+    onDataChange(data);
   }
 
   return (
@@ -31,7 +32,7 @@ function Candidate() {
             placeholder="Select positions role"
             label="Role"
             name="role"
-            
+            event={handleFormDataChange}
           ></SoftwareRoleSelect>
           <LevelSelect
             placeholder="Select position level"
@@ -66,4 +67,4 @@ function Candidate() {
   );
 }
 
-export default Candidate;
+export default CandidateForm;

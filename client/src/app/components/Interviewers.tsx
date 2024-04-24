@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { columns } from "../shared/util/constants";
 import { setAvailabilityValue, setLevelValue, setRoleValue } from "../shared/util/functions";
 
-export default function Interviewers({ receivedTime }: any) {
+export default function Interviewers(props: any) {
 
   const [interviewers, setInterviewers] = useState([]);
 
