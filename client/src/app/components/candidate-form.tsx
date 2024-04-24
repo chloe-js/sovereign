@@ -8,11 +8,14 @@ import SoftwareRoleSelect from "../shared/components/software-role-select";
 
 function Candidate() {
   const [form] = Form.useForm();
-  function onFinish(x: any) {
-    console.log(x);
+
+  function onFinish(form: any) {
+    console.log(form);
   }
 
+  function updateVals(){
 
+  }
 
   return (
     <div className="mx-20 my-6">
@@ -28,6 +31,7 @@ function Candidate() {
             placeholder="Select positions role"
             label="Role"
             name="role"
+            
           ></SoftwareRoleSelect>
           <LevelSelect
             placeholder="Select position level"

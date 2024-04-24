@@ -6,9 +6,9 @@ import { InputProps } from "../interfaces/constants";
 export default function LevelSelect(props: InputProps) {
   const [value, setValue] = useState("");
 
-  const update = (e: any) => {
-    console.log(e);
-    setValue(e);
+  const updateValue = (value: string) => {
+    console.log(value);
+    setValue(value);
   };
 
   return (
@@ -20,7 +20,7 @@ export default function LevelSelect(props: InputProps) {
     >
       <Select
         size="large"
-        onChange={(e) => update(e)}
+        onChange={(e) => updateValue(e)}
         value={value}
         placeholder={props.placeholder}
         options={level}

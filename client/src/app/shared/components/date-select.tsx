@@ -6,12 +6,10 @@ import { InputProps } from "../interfaces/constants";
 
 export default function DateSelect(props: InputProps) {
   const disabledDate: RangePickerProps["disabledDate"] = (current) => {
-    // Disable all days before today
     if (current && current < dayjs().endOf("day")) {
       return true;
     }
 
-    // Disable all days except Tuesdays and Thursdays
     return current && ![2, 4].includes(dayjs(current).day());
   };
   return (

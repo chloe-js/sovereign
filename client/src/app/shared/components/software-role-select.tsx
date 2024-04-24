@@ -6,9 +6,9 @@ import { InputProps } from "../interfaces/constants";
 export default function SoftwareRoleSelect(props: InputProps) {
   const [value, setValue] = useState("");
 
-  const update = (e: any) => {
-    console.log(e);
-    setValue(e);
+  const updateValue = (value: string) => {
+    console.log(value);
+    setValue(value);
   };
 
   return (
@@ -23,7 +23,7 @@ export default function SoftwareRoleSelect(props: InputProps) {
         placeholder={props.placeholder}
         options={roles}
         value={value}
-        onChange={(e) => update(e)}
+        onChange={(e) => updateValue(e)}
       ></Select>
     </Form.Item>
   );

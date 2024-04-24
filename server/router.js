@@ -2,11 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import { addInterviewer, getAvailableInterviewers } from './database.js';
 import { __dirname } from './utils.js';
+
 const router = express.Router();
 
 router.use(cors());
-
-
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
