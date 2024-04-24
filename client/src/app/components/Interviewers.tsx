@@ -22,7 +22,7 @@ export default function Interviewers({ receivedTime }: any) {
         })
         setInterviewers(interviewers);
       })
-      .catch((err) => console.error('Error ' + err));
+      .catch((err) => console.error('Error loading SQL data: ' + err));
   }, []);
 
   const rowSelection = {

@@ -9,9 +9,10 @@ import SoftwareRoleSelect from "../shared/components/software-role-select";
 import { Interviewer } from "../shared/interfaces/constants";
 
 function InterviewerForm() {
+
   const [form] = Form.useForm();
+
   function onFinish(data: Interviewer) {
-    console.log(data);
     const url = "http://localhost:8080/api/add-interviewer";
     const options = {
       method: "POST",
@@ -21,20 +22,20 @@ function InterviewerForm() {
       },
       body: JSON.stringify(data),
     };
-    console.log(url, options, data);
+
     fetch(url, options)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        return response.json(); // Parse the JSON response
+        return response.json();
       })
       .then((data) => {
-        console.log("Success:", data);
+        console.info("Submission success:", data);
         window.location.href = data.redirectUrl
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error("Submission error:", error);
       });
   }
 
