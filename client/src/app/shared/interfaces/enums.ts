@@ -13,4 +13,3 @@ export enum Availability {
     TH = "I'm available on Thursdays",
     BTH = "I'm available on both Tuesdays & Thursdays"
 }
-

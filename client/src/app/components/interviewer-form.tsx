@@ -6,13 +6,13 @@ import EmailField from "../shared/components/email-field";
 import NotesField from "../shared/components/notes-field";
 import DayAvailableSelect from "../shared/components/day-available-select";
 import SoftwareRoleSelect from "../shared/components/software-role-select";
-import { Interviewer } from "../shared/interfaces/constants";
+import { InterviewerSqlSubmission } from "../shared/interfaces/constants";
 
 function InterviewerForm() {
 
   const [form] = Form.useForm();
 
-  function onFinish(data: Interviewer) {
+  function onFinish(data: InterviewerSqlSubmission) {
     const url = "http://localhost:8080/api/add-interviewer";
     const options = {
       method: "POST",

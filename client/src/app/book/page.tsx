@@ -1,21 +1,26 @@
 "use client";
 import { useState } from "react";
 import Interviewers from "../components/Interviewers";
-import Candidate from "../components/candidate-form";
+import CandidateForm from "../components/candidate-form";
 
 export default function Book() {
-  const [interviewerData, setInterviewerData] = useState(null);
+  const [roleData, setRoleData] = useState(null);
+  const [levelData, setLevelData] = useState(null);
 
 
-  function handleInterviewerDataChange(data: any) {
+  function handleRoleChange(data: any) {
     console.log('%c DATA IN PARENT', 'color: cyan; padding: 4px 8px; border: 2px solid cyan;', data);
-    setInterviewerData(data);
+    setRoleData(data);
+  }
+  function handleLevelChange(data: any) {
+    console.log('%c DATA IN PARENT', 'color: cyan; padding: 4px 8px; border: 2px solid cyan;', data);
+    setLevelData(data);
   }
 
   return (
     <>
-      {/* <Candidate onDataChange={handleInterviewerDataChange}></Candidate> */}
-      <Interviewers></Interviewers>
+      <CandidateForm onRoleChange={handleRoleChange} onLevelChange={handleLevelChange}></CandidateForm>
+      <Interviewers role={roleData} level={levelData}></Interviewers>
     </>
   );
 }

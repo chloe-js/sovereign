@@ -7,9 +7,14 @@ export default function SoftwareRoleSelect(props: InputProps) {
   const [value, setValue] = useState("");
 
   const updateValue = (value: string) => {
-    console.log(value);
+    console.log(value + ' from updateValue');
     setValue(value);
   };
+
+  const sendValue = (value: string) =>{
+    console.log(value + ' from sendValue');
+    props.event(value);
+  }
 
   return (
     <Form.Item
@@ -23,7 +28,10 @@ export default function SoftwareRoleSelect(props: InputProps) {
         placeholder={props.placeholder}
         options={roles}
         value={value}
-        onChange={(e) => updateValue(e)}
+        onChange={(e) => {
+          updateValue(e)
+          sendValue(e)
+        }}
       ></Select>
     </Form.Item>
   );
