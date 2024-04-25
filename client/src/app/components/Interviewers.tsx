@@ -7,6 +7,7 @@ export default function Interviewers(props: any) {
 
   const [interviewers, setInterviewers] = useState([]);
   const [selectedRole, setSelectedRole] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:8080/api/interviewers")
@@ -27,9 +28,14 @@ export default function Interviewers(props: any) {
   }, []);
 
   useEffect(() => {
-    console.log(props.role)
+    console.log('%c ROLE ', 'color: yellow; padding: 4px 8px; border: 2px solid yellow;', props.role);
     setSelectedRole(props.role)
   }, [props.role])
+
+  useEffect(() => {
+    console.log('%c LEVEL ', 'color: yellow; padding: 4px 8px; border: 2px solid yellow;', props.level);
+    setSelectedLevel(props.level)
+  }, [props.level])
 
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: any[]) => {
@@ -49,6 +55,7 @@ export default function Interviewers(props: any) {
       </h2>
       <h1>{props.role}</h1>
       <h1>{selectedRole}</h1>
+      <h1>{selectedLevel}</h1>
       <div>
         <Table
         className="pb-10"

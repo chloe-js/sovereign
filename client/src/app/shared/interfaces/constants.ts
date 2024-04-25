@@ -10,12 +10,18 @@ export interface InputProps {
     event?: any;
 }
 
-export interface Interviewer {
+interface InterviewBase {
     id: number;
     interviewerName: string; 
     email: string; 
-    role: number;
     level: string; 
     notes: string; 
     available: string; 
+}
+
+export interface InterviewerSqlSubmission extends InterviewBase {
+    role: number;
+}
+export interface Interviewer extends InterviewBase { 
+    role: string;
 }
