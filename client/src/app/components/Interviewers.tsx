@@ -2,18 +2,17 @@ import { Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { columns } from "../shared/util/constants";
 import { setAvailabilityValue, setLevelValue, setRoleValue } from "../shared/util/functions";
+import { Interviewer } from "../shared/interfaces/constants";
 
 export default function Interviewers(props: any) {
 
   const [interviewers, setInterviewers] = useState([]);
-  const [selectedRole, setSelectedRole] = useState("");
-  const [selectedLevel, setSelectedLevel] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:8080/api/interviewers")
       .then((res) => res.json())
       .then((data) => {
-        const interviewers = data.map((i: any) => {
+        const interviewers = data.map((i: Interviewer) => {
           return {
             ...i,
             role: setRoleValue(i),
@@ -26,16 +25,6 @@ export default function Interviewers(props: any) {
       })
       .catch((err) => console.error('Error loading SQL data: ' + err));
   }, []);
-
-  useEffect(() => {
-    console.log('%c ROLE ', 'color: yellow; padding: 4px 8px; border: 2px solid yellow;', props.role);
-    setSelectedRole(props.role)
-  }, [props.role])
-
-  useEffect(() => {
-    console.log('%c LEVEL ', 'color: yellow; padding: 4px 8px; border: 2px solid yellow;', props.level);
-    setSelectedLevel(props.level)
-  }, [props.level])
 
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: any[]) => {
@@ -53,9 +42,6 @@ export default function Interviewers(props: any) {
       <h2 className="py-6 text-xl">
         Available interviewers
       </h2>
-      <h1>{props.role}</h1>
-      <h1>{selectedRole}</h1>
-      <h1>{selectedLevel}</h1>
       <div>
         <Table
         className="pb-10"

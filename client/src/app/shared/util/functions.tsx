@@ -1,7 +1,7 @@
-import { Interviewer } from "../interfaces/constants";
+import { Interviewer, InterviewerSqlSubmission } from "../interfaces/constants";
 import { Level, Role } from "../interfaces/enums";
 
-export const setRoleValue = (value: Interviewer) => {
+export const setRoleValue = (value: InterviewerSqlSubmission) => {
   return value.role === 1 ? Role.BE : Role.FE;
 };
 
