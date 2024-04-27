@@ -7,7 +7,6 @@ export interface InputProps {
     label: string;
     placeholder: string;
     name: string;
-    event?: any;
 }
 
 interface InterviewBase {
@@ -16,12 +15,13 @@ interface InterviewBase {
     email: string; 
     level: string; 
     notes: string; 
-    available: string; 
+    role: string;
 }
 
 export interface InterviewerSqlSubmission extends InterviewBase {
-    role: number;
+    available: number; 
+
 }
 export interface Interviewer extends InterviewBase { 
-    role: string;
+    available: string; 
 }

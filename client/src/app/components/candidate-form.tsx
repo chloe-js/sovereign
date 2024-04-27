@@ -5,6 +5,7 @@ import LevelSelect from "../shared/components/level-select";
 import NameField from "../shared/components/name-field";
 import TimeSelect from "../shared/components/time-select";
 import SoftwareRoleSelect from "../shared/components/software-role-select";
+import Interviewers from "./Interviewers";
 
 function CandidateForm({ onRoleChange }: any) {
   const [form] = Form.useForm();
@@ -14,13 +15,11 @@ function CandidateForm({ onRoleChange }: any) {
   }
 
   function handleRoleChange(data: string) {
-    console.log('ROLE CHANGE' + data)
-    onRoleChange(data);
+    console.log("ROLE CHANGE" + data);
   }
 
   function handleLevelChange(data: string) {
-    console.log('LEVEL CHANGE' + data)
-    onRoleChange(data);
+    console.log("LEVEL CHANGE" + data);
   }
 
   return (
@@ -30,20 +29,19 @@ function CandidateForm({ onRoleChange }: any) {
         onFinish={onFinish}
         form={form}
         name="booking-form"
-        className="grid grid-cols-12 gap-2"
+        
       >
+        <div className="grid grid-cols-12 gap-2">
         <div className="flex flex-col gap-2 col-span-6">
           <SoftwareRoleSelect
             placeholder="Select positions role"
             label="Role"
             name="role"
-            event={handleRoleChange}
           ></SoftwareRoleSelect>
           <LevelSelect
             placeholder="Select position level"
             label="Level"
             name="level"
-            event={handleLevelChange}
           ></LevelSelect>
         </div>
         <div className="flex flex-col gap-2 col-span-6">
@@ -65,7 +63,13 @@ function CandidateForm({ onRoleChange }: any) {
             ></TimeSelect>
           </div>
         </div>
-        <Button type="primary" htmlType="submit" className="col-start-11 col-end-13">
+        </div>
+        <Interviewers></Interviewers>
+        <Button
+          type="primary"
+          htmlType="submit"
+          className="col-start-11 col-end-13"
+        >
           Submit
         </Button>
       </Form>
