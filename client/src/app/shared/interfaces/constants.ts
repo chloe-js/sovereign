@@ -15,13 +15,13 @@ interface InterviewBase {
     interviewerName: string; 
     email: string; 
     level: string; 
+    role: string;
     notes: string; 
-    available: string; 
 }
 
 export interface InterviewerSqlSubmission extends InterviewBase {
-    role: number;
+    available: number; 
 }
 export interface Interviewer extends InterviewBase { 
-    role: string;
+    available: string; 
 }

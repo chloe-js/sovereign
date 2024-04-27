@@ -9,7 +9,7 @@ export enum Role {
     BE = 'Back-end developer',
 }
 export enum Availability {
-    TU = "I'm available on Tuesdays",
-    TH = "I'm available on Thursdays",
-    BTH = "I'm available on both Tuesdays & Thursdays"
+    TU = "Tuesday",
+    TH = "Thursday",
+    BTH = "Both"
 }

@@ -6,7 +6,7 @@ import NameField from "../shared/components/name-field";
 import TimeSelect from "../shared/components/time-select";
 import SoftwareRoleSelect from "../shared/components/software-role-select";
 
-function CandidateForm({ onRoleChange }: any) {
+function CandidateForm({ onRoleChange, onLevelChange, onDayChange }: any) {
   const [form] = Form.useForm();
 
   function onFinish(form: any) {
@@ -20,7 +20,11 @@ function CandidateForm({ onRoleChange }: any) {
 
   function handleLevelChange(data: string) {
     console.log('LEVEL CHANGE' + data)
-    onRoleChange(data);
+    onLevelChange(data);
+  }
+  function handleDayChange(data: string) {
+    console.log('LEVEL CHANGE' + data)
+    onDayChange(data);
   }
 
   return (
@@ -57,6 +61,7 @@ function CandidateForm({ onRoleChange }: any) {
               placeholder="Select interview date"
               name="interviewDate"
               label="Interview date"
+              event={handleDayChange}
             ></DateSelect>
             <TimeSelect
               placeholder="Select interview time"

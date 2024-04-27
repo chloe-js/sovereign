@@ -8,8 +8,7 @@ import DayAvailableSelect from "../shared/components/day-available-select";
 import SoftwareRoleSelect from "../shared/components/software-role-select";
 import { InterviewerSqlSubmission } from "../shared/interfaces/constants";
 
-function InterviewerForm() {
-
+function InterviewerForm({onLevelChange, onRoleChange}: any) {
   const [form] = Form.useForm();
 
   function onFinish(data: InterviewerSqlSubmission) {
@@ -18,7 +17,7 @@ function InterviewerForm() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(data),
     };
@@ -32,11 +31,21 @@ function InterviewerForm() {
       })
       .then((data) => {
         console.info("Submission success:", data);
-        window.location.href = data.redirectUrl
+        window.location.href = data.redirectUrl;
       })
       .catch((error) => {
         console.error("Submission error:", error);
       });
+  }
+
+  function handleRoleChange(data: string) {
+    console.log('ROLE CHANGE' + data)
+    onRoleChange(data);
+  }
+
+  function handleLevelChange(data: string) {
+    console.log('LEVEL CHANGE' + data)
+    onLevelChange(data);
   }
 
   return (
@@ -63,11 +72,13 @@ function InterviewerForm() {
             label="Role"
             name="role"
             placeholder="Select your role"
+            event={handleRoleChange}
           ></SoftwareRoleSelect>
           <LevelSelect
             label="Level"
             name="level"
             placeholder="Select your level"
+            event={handleLevelChange}
           ></LevelSelect>
           <DayAvailableSelect
             label="Day available"
@@ -85,5 +96,3 @@ function InterviewerForm() {
 }
 
 export default InterviewerForm;
-
-

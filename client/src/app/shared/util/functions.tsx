@@ -1,27 +1,12 @@
-import { Interviewer } from "../interfaces/constants";
-import { Level, Role } from "../interfaces/enums";
+import { InterviewerSqlSubmission } from "../interfaces/constants";
 
-export const setRoleValue = (value: Interviewer) => {
-  return value.role === 1 ? Role.BE : Role.FE;
-};
-
-export const setAvailabilityValue = (value: Interviewer) => {
+export const setAvailabilityValue = (value: InterviewerSqlSubmission) => {
   switch (value.available) {
-    case "tuesday":
+    case 2:
       return "Tuesdays";
-    case "thursday":
+    case 4:
       return "Thursdays";
     default:
       return "Both";
-  }
-};
-export const setLevelValue = (value: Interviewer) => {
-  switch (value.level) {
-    case "junior":
-      return Level.JUNIOR;
-    case "mid":
-      return Level.MID;
-    default:
-      return Level.SENIOR;
   }
 };
