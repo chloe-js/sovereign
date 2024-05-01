@@ -25,3 +25,6 @@ export interface InterviewerSqlSubmission extends InterviewBase {
 export interface Interviewer extends InterviewBase { 
     available: string; 
 }
+
+
+export type InterviewFilter = Pick<Interviewer, 'available' | 'level' | 'role'>;

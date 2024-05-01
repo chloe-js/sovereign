@@ -1,38 +1,22 @@
 import { Table } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { columns } from "../shared/util/constants";
-import { setAvailabilityValue } from "../shared/util/functions";
 
-export default function Interviewers(props: any) {
+export default function Interviewers({selected, interviewers}: any) {
 
-  const [interviewers, setInterviewers] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:8080/api/interviewers")
-      .then((res) => res.json())
-      .then((data) => {
-        const interviewers = data.map((i: any) => {
-          return {
-            ...i,
-            available: setAvailabilityValue(i),
-            key: i.id
-          }
-        })
-        setInterviewers(interviewers);
-      })
-      .catch((err) => console.error('Error loading SQL data: ' + err));
-  }, []);
+  const [selectedInterviewers, setSelectedInterviewers] = useState([]);
 
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: any[]) => {
       console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      setSelectedInterviewers(selectedRows as any);
+      console.log('%c SI > ', 'color: mediumspringgreen; padding: 4px 8px; border: 2px solid mediumspringgreen;', selectedInterviewers);
     },
-    getCheckboxProps: (record: any) => ({
-      disabled: record.name === 'Disabled User',
-      name: record.name,
-    }),
+    // getCheckboxProps: (record: any) => ({
+    //   disabled: record.name === 'Disabled User',
+    //   name: record.name,
+    // }),
   };
-
 
   return (
     <div className="border-t-2">

@@ -11,5 +11,6 @@ export enum Role {
 export enum Availability {
     TU = "I'm available on Tuesdays",
     TH = "I'm available on Thursdays",
-    BTH = "I'm available on both Tuesdays & Thursdays"
+    BTH = "I'm available on both Tuesdays & Thursdays",
+    _BTH = "Both"
 }
