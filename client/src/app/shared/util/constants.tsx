@@ -23,8 +23,7 @@ export const available: Select[] = [
 export const columns: TableColumnsType<any> = [
   {
     title: 'Name',
-    dataIndex: 'interviewerName',
-    render: (text: string) => <a>{text}</a>,
+    dataIndex: 'name',
   },
   {
     title: 'Level',

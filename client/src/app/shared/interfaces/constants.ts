@@ -11,7 +11,7 @@ export interface InputProps {
 
 interface InterviewBase {
     id: number;
-    interviewerName: string; 
+    name: string; 
     email: string; 
     level: string; 
     notes: string; 

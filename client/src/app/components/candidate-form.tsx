@@ -24,11 +24,12 @@ function CandidateForm({ onRoleChange }: any) {
     fetch("http://localhost:8080/api/interviewers")
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         const interviewers = data.map((i: any) => {
+          console.log(i)
           return {
             ...i,
             available: setAvailabilityValue(i.available),
-            key: i.id,
           };
         });
         setInterviewers(interviewers);
