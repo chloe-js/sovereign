@@ -12,7 +12,6 @@ import {
 } from "../shared/util/functions";
 import { useEffect, useState } from "react";
 import { Interviewer } from "../shared/interfaces/constants";
-import axios from "axios";
 
 function CandidateForm({ onRoleChange }: any) {
   const [form] = Form.useForm();
@@ -22,7 +21,6 @@ function CandidateForm({ onRoleChange }: any) {
   const [selected, setSelectedInterviewers] = useState([]);
 
   useEffect(() => {
-    // axios.get("http://localhost:8080/api/interviewers").then(i => console.log(i))
     fetch("http://localhost:8080/api/interviewers")
       .then((res) => res.json())
       .then((data) => {
