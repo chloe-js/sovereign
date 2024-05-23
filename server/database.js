@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { __dirname, path } from './utils.js';
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore/lite';
 
 dotenv.config({
     path: path.resolve(__dirname, './.env')
@@ -19,15 +19,25 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp)
 
+const collections = Object.freeze({
+    interviewers: collection(db, 'interviewers')
+})
+
 export async function getInterviewers(){
-    const interviewers = collection(db, 'interviewers')
     try {
-        const docs = await getDocs(interviewers)
+        const docs = await getDocs(collections.interviewers)
         const data = docs.docs.map(i => i.data())
-        console.log(data)
+        return data
     } catch(err){
-        console.log(err)
         return {error: err, message: 'The available interviewers are not able to be loaded at this time.'}
+    }
+}
+
+export async function postInterviewer(data){
+    try {
+        await addDoc(collections.interviewers, data)
+    } catch(err){
+        return {error: err, message: 'Unable to submit data, try again.'}
     }
 }
 

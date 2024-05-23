@@ -52,7 +52,7 @@ function InterviewerForm() {
           <NameField
             placeholder="Interviewer name"
             label="Name"
-            name="interviewerName"
+            name="name"
           ></NameField>
           <EmailField
             placeholder="Company email"
