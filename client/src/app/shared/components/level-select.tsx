@@ -11,11 +11,6 @@ export default function LevelSelect(props: InputProps) {
     setValue(value);
   };
 
-  const sendValue = (value: string) =>{
-    console.log(value + ' from sendValue');
-    props.event(value);
-  }
-
   return (
     <Form.Item
       label={props.label}
@@ -27,7 +22,6 @@ export default function LevelSelect(props: InputProps) {
         size="large"
         onChange={(e) => {
           updateValue(e)
-          sendValue(e)
         }}
         value={value}
         placeholder={props.placeholder}

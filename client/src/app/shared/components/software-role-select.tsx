@@ -11,10 +11,6 @@ export default function SoftwareRoleSelect(props: InputProps) {
     setValue(value);
   };
 
-  const sendValue = (value: string) =>{
-    console.log(value + ' from sendValue');
-    props.event(value);
-  }
 
   return (
     <Form.Item
@@ -30,7 +26,6 @@ export default function SoftwareRoleSelect(props: InputProps) {
         value={value}
         onChange={(e) => {
           updateValue(e)
-          sendValue(e)
         }}
       ></Select>
     </Form.Item>

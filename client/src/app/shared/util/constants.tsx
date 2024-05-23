@@ -4,20 +4,20 @@ import { Availability, Role, Level } from "../interfaces/enums";
 
 
 export const roles: Select[]  = [
-  { value: 0, label: Role.FE },
-  { value: 1, label: Role.BE },
+  { value: Role.FE, label: Role.FE },
+  { value: Role.BE, label: Role.BE },
 ];
 
 export const level: Select[] = [
-  { value: "junior", label: Level.JUNIOR },
-  { value: "mid", label: Level.MID },
-  { value: "senior", label: Level.SENIOR },
+  { value: Level.JUNIOR, label: Level.JUNIOR },
+  { value: Level.MID, label: Level.MID },
+  { value: Level.SENIOR, label: Level.SENIOR },
 ];
 
 export const available: Select[] = [
-  { value: "tuesday", label: Availability.TU },
-  { value: "thursday", label: Availability.TH },
-  { value: "both", label: Availability.BTH },
+  { value: 2, label: Availability.TU },
+  { value: 4, label: Availability.TH },
+  { value: 24, label: Availability.BTH },
 ];
 
 export const columns: TableColumnsType<any> = [
