@@ -7,6 +7,7 @@ const PORT = 8080;
 app.use(cors())
 app.use('/', router)
 
+
 app.listen(PORT, () => {
     console.log(`Server started on ${PORT}`);
 })
