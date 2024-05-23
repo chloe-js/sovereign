@@ -25,11 +25,10 @@ function CandidateForm({ onRoleChange }: any) {
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
-        const interviewers = data.map((i: any) => {
-          console.log(i)
+        const interviewers = data.map((interviewer: any) => {
           return {
-            ...i,
-            available: setAvailabilityValue(i.available),
+            ...interviewer,
+            available: setAvailabilityValue(interviewer.available),
           };
         });
         setInterviewers(interviewers);

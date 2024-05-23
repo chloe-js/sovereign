@@ -4,26 +4,34 @@ import { columns } from "../shared/util/constants";
 import { Interviewer } from "../shared/interfaces/constants";
 
 export default function Interviewers({ interviewers, onSelect }: any) {
-  const [selectedInterviewers, setSelectedInterviewers] = useState<Interviewer[]>([]);
+  const [selectedInterviewers, setSelectedInterviewers] = useState<
+    Interviewer[]
+  >([]);
 
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: any[]) => {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      console.log(
+        `selectedRowKeys: ${selectedRowKeys}`,
+        "selectedRows: ",
+        selectedRows
+      );
       setSelectedInterviewers(selectedRows);
-      onSelect(selectedRows); // Call the callback function
+      onSelect(selectedRows);
     },
+    getCheckboxProps: (record: any) => ({
+      disabled: record.name === "Disabled User",
+      name: record.name,
+    }),
   };
 
   return (
     <div className="border-t-2">
-      <h2 className="py-6 text-xl">
-        Available interviewers
-      </h2>
+      <h2 className="py-6 text-xl">Available interviewers</h2>
       <div>
         <Table
           className="pb-10"
           rowSelection={{
-            type: 'checkbox',
+            type: "checkbox",
             ...rowSelection,
           }}
           columns={columns}
@@ -33,7 +41,3 @@ export default function Interviewers({ interviewers, onSelect }: any) {
     </div>
   );
 }
-// getCheckboxProps: (record: any) => ({
-//   disabled: record.name === 'Disabled User',
-//   name: record.name,
-// }),
