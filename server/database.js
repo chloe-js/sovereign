@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { __dirname, path } from './utils.js';
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, addDoc, updateDoc } from 'firebase/firestore/lite';
 
 dotenv.config({
     path: path.resolve(__dirname, './.env')
@@ -35,7 +35,9 @@ export async function getInterviewers(){
 
 export async function postInterviewer(data){
     try {
-        await addDoc(collections.interviewers, data)
+        const docRef = await addDoc(collections.interviewers, data)
+        const generatedId = docRef.id;
+        await updateDoc(docRef, { key: generatedId });
     } catch(err){
         return {error: err, message: 'Unable to submit data, try again.'}
     }
