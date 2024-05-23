@@ -20,7 +20,6 @@ interface InterviewBase {
 
 export interface InterviewerSqlSubmission extends InterviewBase {
     available: number; 
-
 }
 export interface Interviewer extends InterviewBase { 
     available: string; 

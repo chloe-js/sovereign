@@ -11,7 +11,6 @@ import {
   setAvailabilityValue,
 } from "../shared/util/functions";
 import { useEffect, useState } from "react";
-import { Availability } from "../shared/interfaces/enums";
 import { Interviewer } from "../shared/interfaces/constants";
 
 function CandidateForm({ onRoleChange }: any) {
@@ -19,7 +18,7 @@ function CandidateForm({ onRoleChange }: any) {
 
   const [interviewersFilter, setInterviewersFilter] = useState([]);
   const [interviewers, setInterviewers] = useState([]);
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelectedInterviewers] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:8080/api/interviewers")
@@ -36,10 +35,10 @@ function CandidateForm({ onRoleChange }: any) {
         setInterviewersFilter(interviewers);
       })
       .catch((err) => console.error("Error loading SQL data: " + err));
-    console.log("ass");
   }, []);
 
   function onFinish(form: any) {
+    form.selectedPersons = selected
     console.log(form);
   }
 
@@ -58,9 +57,9 @@ function CandidateForm({ onRoleChange }: any) {
     setInterviewersFilter(filteredInterviewers);
   }
 
-  // function setSelected(data: any){
-  //   console.log('%c DATA', 'color: teal; padding: 4px 8px; border: 2px solid teal;', data);
-  // }
+  function handleSelectInterviewers(selected: any) {
+    setSelectedInterviewers(selected);
+  }
 
   return (
     <div className="mx-20 my-6">
@@ -104,8 +103,10 @@ function CandidateForm({ onRoleChange }: any) {
             </div>
           </div>
         </div>
-        <Interviewers interviewers={interviewersFilter}></Interviewers>
-        {/* <Interviewers selected={setSelected} interviewers={interviewersFilter}></Interviewers> */}
+        <Interviewers
+          interviewers={interviewersFilter}
+          onSelect={handleSelectInterviewers}
+        ></Interviewers>
         <Button
           type="primary"
           htmlType="submit"
