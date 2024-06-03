@@ -3,7 +3,6 @@ import { Button, Form } from "antd";
 import DateSelect from "../shared/components/date-select";
 import LevelSelect from "../shared/components/level-select";
 import NameField from "../shared/components/name-field";
-import TimeSelect from "../shared/components/time-select";
 import SoftwareRoleSelect from "../shared/components/software-role-select";
 import Interviewers from "./Interviewers";
 import {
@@ -19,6 +18,10 @@ function CandidateForm({ onRoleChange }: any) {
   const [interviewersFilter, setInterviewersFilter] = useState([]);
   const [interviewers, setInterviewers] = useState([]);
   const [selected, setSelectedInterviewers] = useState([]);
+
+  type FormReference = {
+    [key: string]: string;
+  };
 
   useEffect(() => {
     fetch("http://localhost:8080/api/interviewers")
@@ -42,7 +45,8 @@ function CandidateForm({ onRoleChange }: any) {
     console.log(form);
   }
 
-  function filterAvailableInterviewers() {
+  function filterAvailableInterviewers(ref: FormReference) {
+    if(Object.keys(ref).includes('candidateName')) return;
     const role = form.getFieldValue("role") ?? null;
     const level = form.getFieldValue("level") ?? null;
     let available = '';
@@ -68,39 +72,32 @@ function CandidateForm({ onRoleChange }: any) {
         onFinish={onFinish}
         form={form}
         name="booking-form"
-        onValuesChange={filterAvailableInterviewers}
+        onValuesChange={(ref: FormReference) => filterAvailableInterviewers(ref)}
       >
         <div className="grid grid-cols-12 gap-2">
-          <div className="flex flex-col gap-2 col-span-6">
-            <SoftwareRoleSelect
-              placeholder="Select positions role"
-              label="Role"
-              name="role"
-            ></SoftwareRoleSelect>
-            <LevelSelect
-              placeholder="Select position level"
-              label="Level"
-              name="level"
-            ></LevelSelect>
-            <DateSelect
-              placeholder="Select interview date"
-              name="interviewDate"
-              label="Interview date"
-            ></DateSelect>
-          </div>
           <div className="flex flex-col gap-2 col-span-6">
             <NameField
               placeholder="Candidates name"
               name="candidateName"
               label="Candidate"
             ></NameField>
-            <div>
-              <TimeSelect
-                placeholder="Select interview time"
-                name="interviewTime"
-                label="Interview time"
-              ></TimeSelect>
-            </div>
+            <SoftwareRoleSelect
+              placeholder="Select positions role"
+              label="Role"
+              name="role"
+            ></SoftwareRoleSelect>
+          </div>
+          <div className="flex flex-col gap-2 col-span-6">
+            <DateSelect
+              placeholder="Select interview date"
+              name="interviewDate"
+              label="Interview date & time"
+            ></DateSelect>
+            <LevelSelect
+              placeholder="Select position level"
+              label="Level"
+              name="level"
+            ></LevelSelect>
           </div>
         </div>
         <Interviewers
