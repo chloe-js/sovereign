@@ -93,7 +93,7 @@ function CandidateForm({ onRoleChange }: any) {
 
   return (
     <div className="mx-20 my-6">
-      <h2 className="py-6 text-xl">Candidate information</h2>
+      <h2 className="py-1 px-3 rounded-md text-white text-xl bg-svn-secondary inline-block mt-12 mb-4">Candidate information</h2>
       <Form
         onFinish={onFinish}
         form={form}

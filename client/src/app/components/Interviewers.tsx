@@ -26,7 +26,7 @@ export default function Interviewers({ interviewers, onSelect }: any) {
 
   return (
     <div className="border-t-2">
-      <h2 className="py-6 text-xl">Available interviewers</h2>
+      <h2 className="py-1 px-3 rounded-md text-svn-default text-xl bg-svn-secondary inline-block mt-2 mb-4">Available interviewers</h2>
       <div>
         <Table
           className="pb-10"

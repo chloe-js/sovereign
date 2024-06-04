@@ -4,8 +4,8 @@ import { Card, Col, Row } from "antd";
 
 export default function InterviewerInfoSegment({ data }: any) {
   return (
-    <div className="bg-green-100 p-4 h-full rounded-b-lg">
-      <p className="flex justify-center py-2 font-bold">Interviewers details</p>
+    <div className="bg-green-100 p-4 h-full rounded-b-lg ">
+      <p className="flex justify-center text-svn-primary py-2 font-bold">Interviewers details</p>
 
         { data.map( (item: any, index: any) => ( 
       <div className="py-3" key={index}>
