@@ -11,6 +11,7 @@ import {
 } from "../shared/util/functions";
 import { useEffect, useState } from "react";
 import { Interviewer } from "../shared/interfaces/constants";
+import EmailField from "../shared/components/email-field";
 
 function CandidateForm({ onRoleChange }: any) {
   const [form] = Form.useForm();
@@ -40,9 +41,34 @@ function CandidateForm({ onRoleChange }: any) {
       .catch((err) => console.error("Error loading SQL data: " + err));
   }, []);
 
+
   function onFinish(form: any) {
     form.selectedPersons = selected
     console.log(form);
+    const url = "http://localhost:8080/api/add-interview";
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify(form),
+    };
+
+    fetch(url, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.info("Submission success:", data);
+        window.location.href = data.redirectUrl
+      })
+      .catch((error) => {
+        console.error("Submission error:", error);
+      });
   }
 
   function filterAvailableInterviewers(ref: FormReference) {
@@ -81,6 +107,11 @@ function CandidateForm({ onRoleChange }: any) {
               name="candidateName"
               label="Candidate"
             ></NameField>
+            <EmailField
+              label="Email"
+              name="candidateEmail"
+              placeholder="Candidates email"
+            ></EmailField>
             <SoftwareRoleSelect
               placeholder="Select positions role"
               label="Role"
