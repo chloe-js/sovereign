@@ -20,12 +20,12 @@ export default function InterviewsView() {
   const noData = "Not available";
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="py-6 text-xl">Candidate Interviews</h1>
+    <div className="container mx-auto p-4 ">
+      <h2 className="py-1 px-3 rounded-md text-svn-default text-xl bg-svn-secondary inline-block mb-4 mt-12">Upcoming Interviews</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {interviews.length ? ( 
           interviews.map((item: any, index: number) => (
-            <Card key={index} style={{ padding: 0 }} className="">
+            <Card key={index} style={{ padding: 0 }} className=" shadow-md shadow-svn-secondary-op">
               <CandidateInfoSegment data={item}></CandidateInfoSegment>
               <InterviewerInfoSegment
                 data={item.selectedPersons}
@@ -33,7 +33,7 @@ export default function InterviewsView() {
             </Card>
           ))
         ) : (
-          <div>X</div>
+          <h2 className="h-screen">No upcoming interviews scheduled</h2>
         )}
       </div>
     </div>

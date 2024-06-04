@@ -9,7 +9,6 @@ import SoftwareRoleSelect from "../shared/components/software-role-select";
 import { InterviewerSqlSubmission } from "../shared/interfaces/constants";
 
 function InterviewerForm() {
-
   const [form] = Form.useForm();
 
   function onFinish(data: InterviewerSqlSubmission) {
@@ -18,7 +17,7 @@ function InterviewerForm() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(data),
     };
@@ -32,7 +31,7 @@ function InterviewerForm() {
       })
       .then((data) => {
         console.info("Submission success:", data);
-        window.location.href = data.redirectUrl
+        window.location.href = data.redirectUrl;
       })
       .catch((error) => {
         console.error("Submission error:", error);
@@ -40,42 +39,53 @@ function InterviewerForm() {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="py-6 text-xl">Interviewer information</h2>
+    <div className="container mx-auto p-4 h-screen">
+      <h2 className="py-1 px-3 rounded-md text-svn-default text-xl bg-svn-secondary inline-block mb-4 mt-12">
+        Interviewer information
+      </h2>
       <Form
         onFinish={onFinish}
         form={form}
         name="interviewer-form"
         className="grid grid-cols-1 gap-4 mx-auto"
       >
-        <div className="flex flex-col mx-auto">
-          <NameField
-            placeholder="Interviewer name"
-            label="Name"
-            name="name"
-          ></NameField>
-          <EmailField
-            placeholder="Company email"
-            label="Email"
-            name="email"
-          ></EmailField>
-          <SoftwareRoleSelect
-            label="Role"
-            name="role"
-            placeholder="Select your role"
-          ></SoftwareRoleSelect>
-          <LevelSelect
-            label="Level"
-            name="level"
-            placeholder="Select your level"
-          ></LevelSelect>
-          <DayAvailableSelect
-            label="Day available"
-            name="available"
-            placeholder="Select a suitable day for interviews"
-          ></DayAvailableSelect>
-          <NotesField></NotesField>
-          <Button type="primary" htmlType="submit">
+        {/* <div className="flex flex-col w-3/6"> */}
+        <div className="grid grid-cols-12 gap-2">
+          <div className="flex flex-col gap-2 col-span-6">
+            <NameField
+              placeholder="Interviewer name"
+              label="Name"
+              name="name"
+            ></NameField>
+            <EmailField
+              placeholder="Company email"
+              label="Email"
+              name="email"
+            ></EmailField>
+          </div>
+          <div className="flex flex-col gap-2 col-span-6">
+            <SoftwareRoleSelect
+              label="Role"
+              name="role"
+              placeholder="Select your role"
+            ></SoftwareRoleSelect>
+            <LevelSelect
+              label="Level"
+              name="level"
+              placeholder="Select your level"
+            ></LevelSelect>
+          </div>
+          <div className="flex flex-col gap-2 col-span-6">
+            <DayAvailableSelect
+              label="Day available"
+              name="available"
+              placeholder="Select a suitable day for interviews"
+            ></DayAvailableSelect>
+            <NotesField></NotesField>
+          </div>
+          <Button type="primary" htmlType="submit" 
+          className="col-start-11 col-end-13"
+          >
             Add interviewer
           </Button>
         </div>
@@ -85,5 +95,3 @@ function InterviewerForm() {
 }
 
 export default InterviewerForm;
-
-

@@ -11,6 +11,7 @@ const config: Config = {
       colors: {
         'svn-primary': '#00594c',
         'svn-secondary': '#018476',
+        'svn-secondary-op': '#01847655',
         'svn-danger': '#f7403a',
         'svn-warning': '#ffd800',
         'svn-success': '#93c90e',
