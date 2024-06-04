@@ -10,7 +10,7 @@ export interface InputProps {
 }
 
 interface InterviewBase {
-    id: number;
+    key: number;
     name: string; 
     email: string; 
     level: string; 
@@ -23,6 +23,16 @@ export interface InterviewerSqlSubmission extends InterviewBase {
 }
 export interface Interviewer extends InterviewBase { 
     available: string; 
+}
+
+export interface Interviews {
+    role: string;
+    candidateName: string; 
+    level: string; 
+    interviewDate: any; 
+    key: string;
+    email: string;
+    selectedPersons: Interviewer[]; 
 }
 
 

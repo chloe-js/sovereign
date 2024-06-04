@@ -37,3 +37,22 @@ export function availableInterviewerFilter({role, level, available}: InterviewFi
     return isAvailable;
   }
 }
+
+
+export const formatDate = (isoString: any) => {
+  const date = new Date(isoString);
+
+  const options = { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric', 
+    hour: '2-digit', 
+    minute: '2-digit', 
+    hour12: false 
+  };
+
+  // Format the date
+  const formattedDate = date.toLocaleDateString('en-US');
+
+  return formattedDate;
+};

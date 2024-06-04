@@ -33,6 +33,12 @@ body {
   left: 0;
 }
 
+.ant-card-body {
+  padding: 0 !important;
+  height: 100% !important;
+  overflow: hidden;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

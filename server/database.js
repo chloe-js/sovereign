@@ -20,7 +20,8 @@ const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp)
 
 const collections = Object.freeze({
-    interviewers: collection(db, 'interviewers')
+    interviewers: collection(db, 'interviewers'),
+    interviews: collection(db, 'interviews'),
 })
 
 export async function getInterviewers(){
@@ -33,9 +34,30 @@ export async function getInterviewers(){
     }
 }
 
+export async function getInterviews(){
+    try {
+        const docs = await getDocs(collections.interviews)
+        const data = docs.docs.map(i => i.data())
+        console.log(data)
+        return data
+    } catch(err){
+        return {error: err, message: 'The available interviews are not able to be loaded at this time.'}
+    }
+}
+
 export async function postInterviewer(data){
     try {
         const docRef = await addDoc(collections.interviewers, data)
+        const generatedId = docRef.id;
+        await updateDoc(docRef, { key: generatedId });
+    } catch(err){
+        return {error: err, message: 'Unable to submit data, try again.'}
+    }
+}
+
+export async function postInterview(data){
+    try {
+        const docRef = await addDoc(collections.interviews, data)
         const generatedId = docRef.id;
         await updateDoc(docRef, { key: generatedId });
     } catch(err){
