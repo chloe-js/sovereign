@@ -40,15 +40,15 @@ function InterviewerForm() {
   }
 
   return (
-    <div className="mx-20 my-6">
+    <div className="container mx-auto p-4">
       <h2 className="py-6 text-xl">Interviewer information</h2>
       <Form
         onFinish={onFinish}
         form={form}
         name="interviewer-form"
-        className="grid grid-cols-12 gap-2"
+        className="grid grid-cols-1 gap-4 mx-auto"
       >
-        <div className="flex flex-col col-span-full">
+        <div className="flex flex-col mx-auto">
           <NameField
             placeholder="Interviewer name"
             label="Name"
