@@ -39,6 +39,10 @@ body {
   overflow: hidden;
 }
 
+.nav-item:hover {
+  color: #37ff64;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
