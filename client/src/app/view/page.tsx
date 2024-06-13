@@ -1,4 +1,4 @@
-import InterviewsView from "../components/interviews";
+import InterviewsView from "../components/interviews-view";
 
 export default function View() {
 

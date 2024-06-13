@@ -1,12 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Interviews } from "../shared/interfaces/constants";
-import { Card, Col, Row } from "antd";
+import { Button, Card, Col, Row } from "antd";
 import CandidateInfoSegment from "./card-segments/candidate-info-segment";
 import InterviewerInfoSegment from "./card-segments/interviewer-info-card-segment";
+import EditCancelOptions from "./card-segments/edit-cancel-options-segment";
 
 export default function InterviewsView() {
   const [interviews, setInterviews] = useState([] as Interviews[]);
+  const [cardOptionsView, setCardOptionsView] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:8080/api/interviews")
@@ -25,10 +27,10 @@ export default function InterviewsView() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {interviews.length ? ( 
           interviews.map((item: any, index: number) => (
-            <Card key={index} style={{ padding: 0 }} className=" shadow-md shadow-svn-secondary-op">
+            <Card key={index} style={{ padding: 0 }} className="shadow-md shadow-svn-secondary-op">
               <CandidateInfoSegment data={item}></CandidateInfoSegment>
               <InterviewerInfoSegment
-                data={item.selectedPersons}
+                data={item}
               ></InterviewerInfoSegment>
             </Card>
           ))
