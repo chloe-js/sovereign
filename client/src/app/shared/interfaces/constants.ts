@@ -18,7 +18,7 @@ interface InterviewBase {
     role: string;
 }
 
-export interface InterviewerSqlSubmission extends InterviewBase {
+export interface InterviewerSubmission extends InterviewBase {
     available: number; 
 }
 export interface Interviewer extends InterviewBase { 

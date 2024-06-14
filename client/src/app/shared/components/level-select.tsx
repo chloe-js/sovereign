@@ -7,7 +7,6 @@ export default function LevelSelect(props: InputProps) {
   const [value, setValue] = useState("");
 
   const updateValue = (value: string) => {
-    console.log(value);
     setValue(value);
   };
 

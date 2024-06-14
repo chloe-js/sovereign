@@ -7,7 +7,6 @@ export default function SoftwareRoleSelect(props: InputProps) {
   const [value, setValue] = useState("");
 
   const updateValue = (value: string) => {
-    console.log(value + ' from updateValue');
     setValue(value);
   };
 
