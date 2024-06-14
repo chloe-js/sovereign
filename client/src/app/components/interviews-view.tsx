@@ -16,7 +16,7 @@ export default function InterviewsView() {
       .then((interviews) => {
         setInterviews(interviews);
       })
-      .catch((err) => console.error("Error loading SQL data: " + err));
+      .catch((err) => console.error("Error loading data: " + err));
   }, []);
 
   const noData = "Not available";

@@ -28,7 +28,6 @@ function CandidateForm({ onRoleChange }: any) {
     fetch("http://localhost:8080/api/interviewers")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         const interviewers = data.map((interviewer: any) => {
           return {
             ...interviewer,
@@ -38,13 +37,12 @@ function CandidateForm({ onRoleChange }: any) {
         setInterviewers(interviewers);
         setInterviewersFilter(interviewers);
       })
-      .catch((err) => console.error("Error loading SQL data: " + err));
+      .catch((err) => console.error("Error loading data: " + err));
   }, []);
 
 
   function onFinish(form: any) {
     form.selectedPersons = selected
-    console.log(form);
     const url = "http://localhost:8080/api/add-interview";
     const options = {
       method: "POST",

@@ -8,7 +8,17 @@ export default function EditCancelOptions({ data }: any) {
     console.log(data)
   }
   function deleteAppointment(){
-    console.log(data)
+    const url = `http://localhost:8080/api/cancel-interview/${data.key}`;
+    fetch(url, {method: 'DELETE'})
+    .then((data) => data.json())
+    .then((data) => {
+      console.log('Successfully cancelled appointment');
+      window.location.href = data.redirectUrl
+    })
+    .catch((error) => {
+      console.error("Cancel appointment error:", error);
+    });
+
   }
 
   return (

@@ -10,11 +10,6 @@ export default function Interviewers({ interviewers, onSelect }: any) {
 
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: any[]) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
       setSelectedInterviewers(selectedRows);
       onSelect(selectedRows);
     },
