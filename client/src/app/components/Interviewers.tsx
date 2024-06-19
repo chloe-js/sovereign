@@ -31,7 +31,7 @@ export default function Interviewers({ interviewers, onSelect }: any) {
           }}
           columns={columns}
           dataSource={interviewers}
-        />
+        />  
       </div>
     </div>
   );
