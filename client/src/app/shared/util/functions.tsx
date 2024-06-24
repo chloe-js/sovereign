@@ -44,10 +44,19 @@ export function availableInterviewerFilter({role, level, available}: InterviewFi
 export const formatDate = (isoString: any) => {
   const date = new Date(isoString);
 
-  // Format the date
-  const formattedDate = date.toLocaleDateString('en-US');
+  const formattedDate = date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 
-  return formattedDate;
+  const formattedTime = date.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false
+  });
+
+  return `${formattedDate} ${formattedTime}`;
 };
 
 export const stringToDayJsObject = (str: string) => {
