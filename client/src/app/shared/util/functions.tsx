@@ -1,5 +1,7 @@
+import dayjs from "dayjs";
 import { InterviewFilter, Interviewer } from "../interfaces/constants";
 import { Availability } from "../interfaces/enums";
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 export const setAvailabilityValue = (value: number) => {
   switch (value) {
@@ -42,17 +44,22 @@ export function availableInterviewerFilter({role, level, available}: InterviewFi
 export const formatDate = (isoString: any) => {
   const date = new Date(isoString);
 
-  const options = { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric', 
-    hour: '2-digit', 
-    minute: '2-digit', 
-    hour12: false 
-  };
+  const formattedDate = date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 
-  // Format the date
-  const formattedDate = date.toLocaleDateString('en-US');
+  const formattedTime = date.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false
+  });
 
-  return formattedDate;
+  return `${formattedDate} ${formattedTime}`;
 };
+
+export const stringToDayJsObject = (str: string) => {
+  dayjs.extend(customParseFormat)
+  return dayjs(str)
+}

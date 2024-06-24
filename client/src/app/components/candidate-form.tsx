@@ -8,12 +8,14 @@ import Interviewers from "./Interviewers";
 import {
   availableInterviewerFilter,
   setAvailabilityValue,
+  stringToDayJsObject,
 } from "../shared/util/functions";
 import { useEffect, useState } from "react";
 import { Interviewer } from "../shared/interfaces/constants";
 import EmailField from "../shared/components/email-field";
+import { useSearchParams } from "next/navigation";
 
-function CandidateForm({ onRoleChange }: any) {
+function CandidateForm(props: any) {
   const [form] = Form.useForm();
 
   const [interviewersFilter, setInterviewersFilter] = useState([]);
@@ -24,6 +26,8 @@ function CandidateForm({ onRoleChange }: any) {
     [key: string]: string;
   };
 
+  const params = useSearchParams();
+  const id = params.get("id");
   useEffect(() => {
     fetch("http://localhost:8080/api/interviewers")
       .then((res) => res.json())
@@ -40,15 +44,42 @@ function CandidateForm({ onRoleChange }: any) {
       .catch((err) => console.error("Error loading data: " + err));
   }, []);
 
+  useEffect(() => {
+    if (id) {
+      try {
+        const fetchFormData = async () => {
+          const data = await fetch(
+            `http://localhost:8080/api/interviews/${id}`
+          );
+          const res = await data.json();
+          const interviewData = res.filter(
+            (appointment: any) => appointment.key === id
+          );
+          console.log(interviewData)
+          form.setFieldsValue({
+            candidateName: interviewData[0].candidateName,
+            candidateEmail: interviewData[0].candidateEmail,
+            role: interviewData[0].role,
+            level: interviewData[0].level,
+            interviewDate: stringToDayJsObject(interviewData[0].interviewDate)
+          });
+          stringToDayJsObject(interviewData[0].interviewDate)
+        };
+        fetchFormData();
+      } catch (err) {
+        console.error("Issue fetching form data");
+      }
+    }
+  });
 
   function onFinish(form: any) {
-    form.selectedPersons = selected
+    form.selectedPersons = selected;
     const url = "http://localhost:8080/api/add-interview";
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(form),
     };
@@ -62,7 +93,7 @@ function CandidateForm({ onRoleChange }: any) {
       })
       .then((data) => {
         console.info("Submission success:", data);
-        window.location.href = data.redirectUrl
+        window.location.href = data.redirectUrl;
       })
       .catch((error) => {
         console.error("Submission error:", error);
@@ -70,17 +101,17 @@ function CandidateForm({ onRoleChange }: any) {
   }
 
   function filterAvailableInterviewers(ref: FormReference) {
-    if(Object.keys(ref).includes('candidateName')) return;
+    if (Object.keys(ref).includes("candidateName")) return;
     const role = form.getFieldValue("role") ?? null;
     const level = form.getFieldValue("level") ?? null;
-    let available = '';
+    let available = "";
     if (form.getFieldValue("interviewDate")) {
       const { $W } = form.getFieldValue("interviewDate") ?? null;
-      available = $W ? setAvailabilityValue($W) : '';
+      available = $W ? setAvailabilityValue($W) : "";
     }
 
     const filteredInterviewers = interviewers.filter((i: Interviewer) => {
-        return availableInterviewerFilter({ role, level, available }, i);
+      return availableInterviewerFilter({ role, level, available }, i);
     });
     setInterviewersFilter(filteredInterviewers);
   }
@@ -91,12 +122,16 @@ function CandidateForm({ onRoleChange }: any) {
 
   return (
     <div className="mx-20 my-6">
-      <h2 className="py-1 px-3 rounded-md text-white text-xl bg-svn-secondary inline-block mt-12 mb-4">Candidate information</h2>
+      <h2 className="py-1 px-3 rounded-md text-white text-xl bg-svn-secondary inline-block mt-12 mb-4">
+        Candidate information
+      </h2>
       <Form
         onFinish={onFinish}
         form={form}
         name="booking-form"
-        onValuesChange={(ref: FormReference) => filterAvailableInterviewers(ref)}
+        onValuesChange={(ref: FormReference) =>
+          filterAvailableInterviewers(ref)
+        }
       >
         <div className="grid grid-cols-12 gap-2">
           <div className="flex flex-col gap-2 col-span-6">

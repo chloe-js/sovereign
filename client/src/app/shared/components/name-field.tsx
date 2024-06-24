@@ -1,5 +1,6 @@
+"use client";
 import { Form, Input } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { InputProps } from "../interfaces/constants";
 
 export default function NameField(props: InputProps) {

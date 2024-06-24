@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { getInterviewers, postInterviewer, postInterview, getInterviews, deleteInterview } from './database.js';
+import { getInterviewers, postInterviewer, postInterview, getInterviews, deleteInterview, getInterview } from './database.js';
 import { __dirname } from './utils.js';
 
 const router = express.Router();
@@ -18,9 +18,19 @@ router.get("/api/interviewers", async (req, res) => {
     }
 })
 
+
 router.get("/api/interviews", async (req, res) => {
     try {
         const interviews = await getInterviews();
+        res.json(interviews)
+    } catch (err) {
+        console.log('Attempt to get interviews unsuccessful: ', err)
+    }
+})
+
+router.get("/api/interviews/:id", async (req, res) => {
+    try {
+        const interviews = await getInterview();
         res.json(interviews)
     } catch (err) {
         console.log('Attempt to get interviews unsuccessful: ', err)

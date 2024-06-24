@@ -44,6 +44,16 @@ export async function getInterviews(){
     }
 }
 
+export async function getInterview(){
+    const docs = await getDocs(collections.interviews)
+    try {
+        const data = docs.docs.map(i => i.data())
+        return data
+    } catch(err){
+        return {error: err, message: 'The available interviews are not able to be loaded at this time.'}
+    }
+}
+
 export async function postInterviewer(data){
     const docRef = await addDoc(collections.interviewers, data)
     try {
