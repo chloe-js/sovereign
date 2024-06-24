@@ -8,6 +8,7 @@ import Interviewers from "./Interviewers";
 import {
   availableInterviewerFilter,
   setAvailabilityValue,
+  stringToDayJsObject,
 } from "../shared/util/functions";
 import { useEffect, useState } from "react";
 import { Interviewer } from "../shared/interfaces/constants";
@@ -20,7 +21,6 @@ function CandidateForm(props: any) {
   const [interviewersFilter, setInterviewersFilter] = useState([]);
   const [interviewers, setInterviewers] = useState([]);
   const [selected, setSelectedInterviewers] = useState([]);
-  const [currentInterview, setCurrentInterview] = useState([]);
 
   type FormReference = {
     [key: string]: string;
@@ -33,7 +33,6 @@ function CandidateForm(props: any) {
       .then((res) => res.json())
       .then((data) => {
         const interviewers = data.map((interviewer: any) => {
-          console.log(interviewers)
           return {
             ...interviewer,
             available: setAvailabilityValue(interviewer.available),
@@ -45,17 +44,33 @@ function CandidateForm(props: any) {
       .catch((err) => console.error("Error loading data: " + err));
   }, []);
 
-  // useEffect(() => {
-  //   if(id){
-  //     fetch(`http://localhost:8080/api/interviews/${id}`) 
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       const interviewData = data.filter((appointment: any) => appointment.key === id)
-  //       setCurrentInterview(interviewData);
-  //     })
-  //     .catch((err) => console.error("Error loading data: " + err));
-  //   }
-  // });
+  useEffect(() => {
+    if (id) {
+      try {
+        const fetchFormData = async () => {
+          const data = await fetch(
+            `http://localhost:8080/api/interviews/${id}`
+          );
+          const res = await data.json();
+          const interviewData = res.filter(
+            (appointment: any) => appointment.key === id
+          );
+          console.log(interviewData)
+          form.setFieldsValue({
+            candidateName: interviewData[0].candidateName,
+            candidateEmail: interviewData[0].candidateEmail,
+            role: interviewData[0].role,
+            level: interviewData[0].level,
+            interviewDate: stringToDayJsObject(interviewData[0].interviewDate)
+          });
+          stringToDayJsObject(interviewData[0].interviewDate)
+        };
+        fetchFormData();
+      } catch (err) {
+        console.error("Issue fetching form data");
+      }
+    }
+  });
 
   function onFinish(form: any) {
     form.selectedPersons = selected;
@@ -124,13 +139,11 @@ function CandidateForm(props: any) {
               placeholder="Candidates name"
               name="candidateName"
               label="Candidate"
-              // initialValue={currentInterview?.[0]?.['candidateName']}
             ></NameField>
             <EmailField
               label="Email"
               name="candidateEmail"
               placeholder="Candidates email"
-              // initValue={currentInterview.length ? currentInterview[0].email : null}
             ></EmailField>
             <SoftwareRoleSelect
               placeholder="Select positions role"
